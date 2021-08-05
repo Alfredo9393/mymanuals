@@ -1,0 +1,22 @@
+				
+*****Install Docker on Oracle Linux 8******julio-2021
+
+1- systemctl stop firewalld
+2- systemctl disable firewalld
+3- dnf install -y dnf-utils zip unzip
+4- dnf config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
+5- dnf install -y docker-ce --nobest
+	
+	NOTA: Si sale un error como este tipo
+		  problema: problem with installed package podman-3.0.1-6.0.1.module+el8.4.0+20157+b6591bfb.x86_64
+	Hay que ejecutar el mismo comando + --allowerasing
+    ejemplo: dnf install -y docker-ce --nobest --allowerasing
+6- systemctl enable docker.service
+7- systemctl start docker.service
+8- systemctl status docker.service
+9- docker info
+10 - docker version
+
+comentarios: 
+-Instalacion en maquina virtual con oracle linux 8
+-Esto se instalo para un requerimiento antes de una instalacion de minikube 
