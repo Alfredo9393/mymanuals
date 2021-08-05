@@ -1,0 +1,42 @@
+
+
+-----------------Install Minikube and kubectl on Oracle Linux 8-----------julio-2021
+
+
+1- Donwnload minikube
+curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-latest.x86_64.rpm   
+sudo rpm -Uvh minikube-latest.x86_64.rpm
+
+	Nota: Si sale este error
+		X Exiting due to RSRC_INSUFFICIENT_CORES: Requested cpu count 2 is greater than the available cpus of 1
+		la solucion fue agregarle mas cpus en las configuraciones de la maquina de la maquina virtual
+		
+		
+2- Start Minikube: minikube start
+	Nota: si sale este error
+	X Exiting due to DRV_AS_ROOT: The "docker" driver should not be used with root privileges.
+	Indica que no se puede ejecutar con root asi se tiene que agregar un usuario en el grupo de docker
+	ejemplo: sudo usermod -aG docker <root>  despues reiniciar y entrar con el usuario que se registro 
+	sudo usermod -aG docker adap  
+	echo "adap  ALL=(ALL)  NOPASSWD: /usr/bin/docker" >> /etc/sudoers
+    echo "alias docker=\"sudo /usr/bin/docker\"" >> /home/adap/.bash_profile
+	
+	
+3- Check Minikube Status
+	minikube status
+
+4-Install kubectl
+	minikube kubectl -- get po -A
+5- ejecutar comando 
+	sudo ln -s $(which minikube) /usr/local/bin/kubectl
+6- kubectl version
+
+
+comentarios:
+Para esta istalacion se ejecuto todo como root.
+donwloand https://minikube.sigs.k8s.io/docs/start/
+https://www.youtube.com/watch?v=NHYryUAwDpI&ab_channel=Lian
+
+
+
+

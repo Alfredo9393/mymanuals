@@ -17,6 +17,14 @@
 9- docker info
 10 - docker version
 
+
+11- Agregar usuario dentro del grupo de docker y reiniciar. Esto es para poder
+ejecutar docker e instalar minikube con ese usuario mas adelante
+sudo usermod -aG docker alfredo
+echo "alfredo  ALL=(ALL)  NOPASSWD: /usr/bin/docker" >> /etc/sudoers
+echo "alias docker=\"sudo /usr/bin/docker\"" >> /home/alfredo/.bash_profile
+
 comentarios: 
 -Instalacion en maquina virtual con oracle linux 8
 -Esto se instalo para un requerimiento antes de una instalacion de minikube 
+https://www.youtube.com/watch?v=403H_L8UOKk&ab_channel=Lian
