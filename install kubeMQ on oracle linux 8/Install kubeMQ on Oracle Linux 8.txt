@@ -1,0 +1,33 @@
+
+
+-----------------Install kubeMQ on Oracle Linux 8-----------julio-2021
+
+1- kubectl apply -f https://deploy.kubemq.io/init
+
+2- kubectl apply -f https://deploy.kubemq.io/key/56e8c49a-bc8a-47da-94ca-19d3e19f01dc
+
+3- verificar instalacion de cluster de kubeMQ
+kubectl get kubemqclusters -n kubemq
+
+4
+sudo curl -sL https://get.kubemq.io/install | sudo sh
+
+5
+docker run -d -p 8080:8080 -p 50000:50000 -p 9090:9090 KEY=56e8c49a-bc8a-47da-94ca-19d3e19f01dc kubemq/kubemq-standalone:latest
+
+	Nota: si sale este error: 
+	docker: invalid reference format: repository name must be lowercase.
+	solucion: cambiar a minuscula la palabra KEY y agregar una -e antes de esta palabra	
+	ejemplo: 
+	docker run -d -p 8080:8080 -p 50000:50000 -p 9090:9090 -e KEY=56e8c49a-bc8a-47da-94ca-19d3e19f01dc kubemq/kubemq-standalone:latest
+	
+6- enviar un mensaje en una cola
+	kubemqctl queue send my-queue hello-world
+
+7- en otra terminal recibe el mensaje enviado
+	kubemqctl queue receive my-queue
+
+referencis
+https://kubemq.io/quick-start/
+https://github.com/kubemq-io/kubemq
+
